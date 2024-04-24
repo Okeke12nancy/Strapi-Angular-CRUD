@@ -1,15 +1,33 @@
-<form >
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" name="title" class="form-control" id="title" [(ngModel)] = newArticle.title required>
+<form class="form_wrapper" (ngSubmit)="onSubmit()">
+  <div class="label_input">
+    <input
+      type="text"
+      name="title"
+      id="title"
+      [(ngModel)]="newArticle.title"
+      required
+      placeholder="Title"
+    />
   </div>
-  <div class="mb-3">
-    <label for="content" class="form-label">Content</label>
-    <textarea class="form-control" name="content" id="content" rows="3" [(ngModel)] = newArticle.content required></textarea>
+  <div class="label_input">
+    <textarea
+      name="content"
+      id="content"
+      rows="3"
+      [(ngModel)]="newArticle.content"
+      required
+      placeholder="Content"
+    ></textarea>
   </div>
-  <div class="mb-3">
-    <label for="author" class="form-label">Author</label>
-    <input type="text" name="author" class="form-control" id="author" [(ngModel)] = newArticle.author required>
+  <div class="label_input">
+    <input
+      type="text"
+      name="author"
+      id="author"
+      [(ngModel)]="newArticle.author"
+      required
+      placeholder="Author"
+    />
   </div>
-  <button type="submit" class="btn btn-primary">Create News</button>
+  <button type="submit" class="createNews_btn">Create News</button>
 </form>

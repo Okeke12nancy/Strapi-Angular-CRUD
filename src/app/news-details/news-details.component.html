@@ -1,0 +1,11 @@
+<p>{{articleDetails.content}}</p>
+<button (click)="deleteConfirm()">Delete</button>
+<app-modal [isOpen]="deleteModalOpen" (isClose)="deleteModalToggle(false)">
+  <div class="modal_confirm">
+    <h1>Are you sure you want to Delete Article?</h1>
+    <div class="actions_modal">
+      <button class='deleteBtn' (click)="deleteNews()">Delete</button>
+      <button class='cancelBtn' (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</app-modal>
