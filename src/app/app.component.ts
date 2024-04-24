@@ -1,13 +1,53 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NewsServiceTsService } from './news-service.ts.service';
+import { NewsArticle } from './models/news';
+import { NewsCardComponent } from './news-card/news-card.component';
+import { CreateNewsAppComponent } from './create-news-app/create-news-app.component';
+import { NewsListComponent } from './news-list/news-list.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule, RouterOutlet, NewsCardComponent, CreateNewsAppComponent, NewsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'newsApp';
+export class AppComponent implements OnInit{
+  newsArticles: NewsArticle[] =[]
+  error: any;
+
+  // constructor(private newsService: NewsServiceTsService) { }
+  ngOnInit() {
+
+  }
+  // ngOnInit() {
+  //   this.newsService.getNews()
+  //     .subscribe(
+  //       (data) => this.newsArticles = data,
+  //       (error) => this.error = error
+  //     );
+  // }
+
+
+  // getNews() {
+  //   // Call this method to refresh news list (optional)
+  //   this.newsService.getNews()
+  //     .subscribe(articles => this.newsArticles = articles);
+  // }
+
+//   deleteNews(id: number) {
+//     this.newsService.deleteNews(id)
+//       .subscribe(() => {
+//         // Update the list after successful deletion (optional)
+//       });
+//   }
 }
+
+
+
+
+
+
+
