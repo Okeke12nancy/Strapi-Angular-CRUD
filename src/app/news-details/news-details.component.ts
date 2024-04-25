@@ -4,17 +4,19 @@ import { NewsServiceTsService } from '../news-service.ts.service';
 import { NewsListComponent } from '../news-list/news-list.component';
 import { CreateNewsAppComponent } from '../create-news-app/create-news-app.component';
 import { ModalComponent } from '../modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-news-details',
   standalone: true,
-  imports: [NewsListComponent, CreateNewsAppComponent, ModalComponent],
+  imports: [NewsListComponent, CreateNewsAppComponent, ModalComponent, FormsModule],
   templateUrl: './news-details.component.html',
   styleUrl: './news-details.component.css',
 })
 export class NewsDetailsComponent {
   newsArticles: any = [];
   deleteModalOpen: boolean = false;
+  editModalOpen: boolean = false;
   articleId: any = '';
   articleDetails: any = {};
 
@@ -42,6 +44,21 @@ export class NewsDetailsComponent {
       this.router.navigate(['']);
     });
   }
+
+  edit(){
+    this.editModalOpen = true
+  }
+
+  backToHomepage(){
+    this.router.navigate(['']);
+  }
+
+  editNews(){
+    this.newsService.updateNews(this.articleDetails).subscribe(() => {
+      this.editModalOpen = false
+    })
+  }
+
   deleteModalToggle(open: boolean) {
     this.deleteModalOpen = open;
   }

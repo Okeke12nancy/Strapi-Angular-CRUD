@@ -54,6 +54,8 @@ export class CreateNewsAppComponent {
         title: this.newArticle.title,
         content: this.newArticle.content,
         author: this.newArticle.author,
+        date: new Date(),
+        imageUrl: this.newArticle.imageUrl
       };
       console.log(article)
       this.newsArticles.push(article)

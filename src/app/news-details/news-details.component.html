@@ -1,11 +1,36 @@
-<p>{{articleDetails.content}}</p>
-<button (click)="deleteConfirm()">Delete</button>
-<app-modal [isOpen]="deleteModalOpen" (isClose)="deleteModalToggle(false)">
-  <div class="modal_confirm">
-    <h1>Are you sure you want to Delete Article?</h1>
-    <div class="actions_modal">
-      <button class='deleteBtn' (click)="deleteNews()">Delete</button>
-      <button class='cancelBtn' (click)="cancel()">Cancel</button>
+<div class="wrapper">
+  <img [src]="articleDetails.imageUrl" alt="">
+
+
+  @if (!editModalOpen){
+    <p>{{articleDetails.title}}</p>
+  <p>{{ articleDetails.content }}</p>
+
+  } @else {
+    <input type="text" [(ngModel)]="articleDetails.title">
+  <textarea
+    [(ngModel)]="articleDetails.content"
+    name=""
+    id=""
+    cols="30"
+    rows="10"
+  ></textarea>
+  }
+  <button (click)="deleteConfirm()">Delete</button>
+
+  @if (!editModalOpen){<button (click)="edit()">edit</button>} @else {<button
+    (click)="editNews()"
+  >
+    save</button
+  >}
+  <button (click)="backToHomepage()">Back to home page</button>
+  <app-modal [isOpen]="deleteModalOpen" (isClose)="deleteModalToggle(false)">
+    <div class="modal_confirm">
+      <h1>Are you sure you want to Delete Article?</h1>
+      <div class="actions_modal">
+        <button class="deleteBtn" (click)="deleteNews()">Delete</button>
+        <button class="cancelBtn" (click)="cancel()">Cancel</button>
+      </div>
     </div>
-  </div>
-</app-modal>
+  </app-modal>
+</div>
