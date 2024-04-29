@@ -1,18 +1,36 @@
 {
   "news": [
     {
-      "id": "8070",
-      "title": "food wagoon",
-      "content": "food fo thought",
-      "author": "Cynthia Morgan"
+      "id": "3f63",
+      "title": "Flood in Nigeria",
+      "content": "The flood in Dubai was a very negative two and destroyed a lot of properties.",
+      "author": "Abdul Basit",
+      "date": "2024-04-25T00:46:17.202Z",
+      "imageUrl": ""
     },
     {
-      "id": "ac6e",
-      "title": "Pric",
-      "content": "of food should come down",
-      "author": "tinubu",
-      "date": "2024-04-25T00:03:26.094Z",
-      "imageUrl": "C:\\fakepath\\edducare.jpg"
+      "id": "f963",
+      "title": "Flood in Dubai",
+      "content": "sere sere",
+      "author": "Abdul Basit",
+      "date": "2024-04-25T01:49:49.046Z",
+      "imageUrl": ""
+    },
+    {
+      "id": "eb7a",
+      "title": "From Usl to the Top",
+      "content": "flenjo flenjo",
+      "author": "Nancy Beloxy",
+      "date": "2024-04-25T01:53:21.672Z",
+      "imageUrl": ""
+    },
+    {
+      "id": "9f0b",
+      "title": "From Usl to the Top",
+      "content": "hello World",
+      "author": "Abdul Basit",
+      "date": "2024-04-29T16:37:33.809Z",
+      "imageUrl": ""
     }
   ]
 }

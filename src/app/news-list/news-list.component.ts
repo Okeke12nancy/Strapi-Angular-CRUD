@@ -21,8 +21,8 @@ export class NewsListComponent {
   ngOnInit(){
     this.newsService.news$.subscribe((latestNews) => {
       this.newsArticles = latestNews;
+      console.log(this.newsArticles)
     });
-    console.log(this.newsArticles)
   }
 
   // onReadMore(article: any) {

@@ -30,5 +30,10 @@
     />
   </div>
   <input type="file" name="articleImage" id="articleImage" [(ngModel)]="newArticle.imageUrl" >
-  <button type="submit" class="createNews_btn">Create News</button>
+
+  @if(!isLoading) {
+    <button type="submit" class="createNews_btn">Create News</button>
+  }@else {
+    <button type="submit" disabled class="isLoading">Loading...</button>
+  }
 </form>

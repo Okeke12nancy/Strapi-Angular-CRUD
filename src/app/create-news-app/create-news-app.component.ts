@@ -1,16 +1,10 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  Input,
-  OnChanges,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { NewsArticle } from '../models/news';
 import { NewsServiceTsService } from '../news-service.ts.service';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-news-app',
@@ -21,7 +15,7 @@ import { RouterModule } from '@angular/router';
 })
 export class CreateNewsAppComponent {
   newsArticles: NewsArticle[] = [];
-  @Output() create = new EventEmitter<void>();
+  isLoading: boolean = false;
 
   newArticle: NewsArticle = {
     title: '',
@@ -31,40 +25,50 @@ export class CreateNewsAppComponent {
     imageUrl: '',
   };
 
-  // newArticleForm: FormGroup; // Declare FormGroup for reactive form
 
-  constructor(private newsService: NewsServiceTsService) {
-    //   // this.newArticleForm = this.fb.group ({
-    //   //   title: ['', Validators.required],
-    //   //   content: ['', Validators.required],
-    //   //   author: ['', Validators.required],
-    //   //   date: [new Date(), Validators.required],
-    //   //   imageUrl: ['', Validators.required]
-    //   // });
+  constructor(
+    private newsService: NewsServiceTsService,
+    private toastr: ToastrService
+  ) {
   }
 
-  ngOnInit(){
-    console.log(this.newArticle)
+  ngOnInit() {
+    console.log(this.newArticle);
+  }
+
+  isEmpty(value: string | null): boolean {
+    return value === '' || value === null;
   }
 
   onSubmit() {
-    console.log(this.newArticle)
-    if (this.newArticle) {
+    console.log(this.newArticle);
+    if (
+      this.isEmpty(this.newArticle.title) ||
+      this.isEmpty(this.newArticle.content) ||
+      this.isEmpty(this.newArticle.author)
+    ) {
+      this.toastr.warning(
+        'Please fill in all required fields: Title, Content, and Author.'
+      );
+      return; // Prevent further processing if fields are empty
+    } else {
       const article: any = {
         title: this.newArticle.title,
         content: this.newArticle.content,
         author: this.newArticle.author,
         date: new Date(),
-        imageUrl: this.newArticle.imageUrl
+        imageUrl: this.newArticle.imageUrl,
       };
-      console.log(article)
-      this.newsArticles.push(article)
+      console.log(article);
+      this.isLoading = true;
+      this.newsArticles.push(article);
       this.newsService.createNews(article).subscribe(() => {
         this.newArticle.title = '';
         this.newArticle.content = '';
         this.newArticle.author = '';
-        this.create.emit();
+        this.isLoading = false;
       });
+      this.toastr.success('Article Created');
     }
   }
 }

@@ -38,3 +38,19 @@
   font-family: 'Poppins', sans-serif;
   color: #FFF;
 }
+.isLoading{
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgb(204, 183, 223);
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: #FFF;
+}
+@media screen and (max-width: 700px) {
+  .form_wrapper{
+    width: 100%;
+    padding: 10px;
+  }
+}

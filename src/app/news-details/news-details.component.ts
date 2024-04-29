@@ -5,6 +5,7 @@ import { NewsListComponent } from '../news-list/news-list.component';
 import { CreateNewsAppComponent } from '../create-news-app/create-news-app.component';
 import { ModalComponent } from '../modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-news-details',
@@ -23,7 +24,8 @@ export class NewsDetailsComponent {
   constructor(
     private newsService: NewsServiceTsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class NewsDetailsComponent {
         (news: any) => news.id !== this.articleDetails.id
       );
       this.router.navigate(['']);
+      this.toastr.success('Article Deleted')
     });
   }
 
@@ -57,6 +60,7 @@ export class NewsDetailsComponent {
     this.newsService.updateNews(this.articleDetails).subscribe(() => {
       this.editModalOpen = false
     })
+    this.toastr.success('Article Updated')
   }
 
   deleteModalToggle(open: boolean) {
