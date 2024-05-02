@@ -2,7 +2,6 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
 import { Component, OnInit } from '@angular/core';
 import { NewsServiceTsService } from './news-service.ts.service';
 import { NewsArticle } from './models/news';
-import { NewsCardComponent } from './news-card/news-card.component';
 import { CreateNewsAppComponent } from './create-news-app/create-news-app.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import { CommonModule } from '@angular/common';
@@ -13,7 +12,7 @@ import { NewsDetailsComponent } from './news-details/news-details.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NewsCardComponent, CreateNewsAppComponent, NewsListComponent, NewsDetailsComponent],
+  imports: [CommonModule, RouterOutlet, CreateNewsAppComponent, NewsListComponent, NewsDetailsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
