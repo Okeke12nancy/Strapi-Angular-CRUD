@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NewsArticle } from '../models/news';
 import { NewsServiceTsService } from '../news-service.ts.service';
 import { FormsModule } from '@angular/forms';
@@ -14,14 +14,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './create-news-app.component.css',
 })
 export class CreateNewsAppComponent {
-  newsArticles: NewsArticle[] = [];
+  @Output() isModalClose = new EventEmitter <boolean>()
+  newsArticles: any = [];
   isLoading: boolean = false;
 
-  newArticle: NewsArticle = {
+  newArticle: any = {
     title: '',
     content: '',
     author: '',
-    date: new Date(),
     imageUrl: '',
   };
 
@@ -33,7 +33,7 @@ export class CreateNewsAppComponent {
   }
 
   ngOnInit() {
-    console.log(this.newArticle);
+    // console.log(this.newArticle);
   }
 
   isEmpty(value: string | null): boolean {
@@ -41,10 +41,12 @@ export class CreateNewsAppComponent {
   }
 
   onSubmit() {
+    // console.log(this.newArticle);
     if (
       this.isEmpty(this.newArticle.title) ||
       this.isEmpty(this.newArticle.content) ||
-      this.isEmpty(this.newArticle.author)
+      this.isEmpty(this.newArticle.author) ||
+      this.isEmpty(this.newArticle.imageUrl)
     ) {
       this.toastr.warning(
         'Please fill in all required fields: Title, Content, and Author.'
@@ -59,16 +61,22 @@ export class CreateNewsAppComponent {
         // date: new Date(),
         imageUrl: this.newArticle.imageUrl,
       };
-      console.log(article);
+      // console.log(article);
       this.isLoading = true;
       this.newsArticles.push(article);
-      this.newsService.createNews({ data: article }).subscribe(() => {
+      this.newsService.createNews({data : article}).subscribe(() => {
         this.newArticle.title = '';
         this.newArticle.content = '';
         this.newArticle.author = '';
+        this.newsArticles.imageUrl = '';
         this.isLoading = false;
+        this.closeModal()
       });
       this.toastr.success('Article Created');
     }
+  }
+
+  closeModal() {
+    this.isModalClose.emit(false)
   }
 }

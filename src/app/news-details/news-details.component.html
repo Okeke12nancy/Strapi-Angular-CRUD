@@ -13,8 +13,10 @@
       />
       }
     </div>
-    <img src="../../assets/images/floodDubai2.webp" alt="" />
-    <div>
+    <div >
+      <img class="article_img" [src]="articleDetails.imageUrl" alt="" />
+    </div>
+    <!-- <div class="article_content"> -->
       @if (!editModalOpen){
       <p class="article_content">{{ articleDetails.content }}</p>
 
@@ -28,7 +30,7 @@
         rows="10"
       ></textarea>
       }
-    </div>
+    <!-- </div> -->
     <div class="actions_btn">
       <i
         style="color: red; cursor: pointer"

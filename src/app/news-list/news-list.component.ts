@@ -1,36 +1,53 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewsArticle } from '../models/news';
+import { ModalComponent } from '../modal/modal.component';
 import { NewsServiceTsService } from '../news-service.ts.service';
 import { Router, RouterLink } from '@angular/router';
+import { CreateNewsAppComponent } from '../create-news-app/create-news-app.component';
 
 @Component({
   selector: 'app-news-list',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, ModalComponent, CreateNewsAppComponent],
   templateUrl: './news-list.component.html',
-  styleUrl: './news-list.component.css'
+  styleUrl: './news-list.component.css',
 })
 export class NewsListComponent {
-  newsArticles: NewsArticle[] = []
+  newsArticles: any = [];
+  news!: any;
+  createModalOpen: boolean = false;
 
-  constructor(private newsService: NewsServiceTsService, private router: Router){
-
+  constructor(
+    private newsService: NewsServiceTsService,
+    private router: Router
+  ) {
+    
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.getNews();
+  }
+
+  onReadMore(id: any) {
+    this.router.navigate(['/articles', id]);
+  }
+
+  create() {
+    this.createModalOpen = true;
+  }
+
+  createModalToggle(open: boolean) {
+    this.createModalOpen = open;
+  }
+
+  getNews() {
     this.newsService.news$.subscribe((latestNews) => {
-      this.newsArticles = latestNews;
-      console.log(this.newsArticles)
+      this.newsArticles = latestNews.data;
     });
   }
 
-  // onReadMore(article: any) {
-  //   console.log(article);
-  //   this.router.navigate(['articles']); 
-  // }
-
-  onReadMore(article: any) {
-    this.router.navigate(['/articles', article.id]);
+  closeFromCreate(open: boolean) {
+    this.createModalOpen = open;
   }
 }

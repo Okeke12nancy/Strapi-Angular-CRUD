@@ -10,7 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-news-details',
   standalone: true,
-  imports: [NewsListComponent, CreateNewsAppComponent, ModalComponent, FormsModule],
+  imports: [
+    NewsListComponent,
+    CreateNewsAppComponent,
+    ModalComponent,
+    FormsModule,
+  ],
   templateUrl: './news-details.component.html',
   styleUrl: './news-details.component.css',
 })
@@ -32,35 +37,41 @@ export class NewsDetailsComponent {
     this.route.params.subscribe((params) => {
       const articleId = params['id'];
       this.newsService.getNewsById(articleId).subscribe((latestNews) => {
-        this.articleDetails = latestNews;
-        console.log(articleId, 'mmm');
+        this.articleDetails = latestNews.data.attributes;
+        console.log(this.articleDetails.imageUrl);
       });
     });
   }
 
   deleteNews() {
-    this.newsService.deleteNews(this.articleDetails.id).subscribe(() => {
-      this.newsArticles = this.newsArticles.filter(
-        (news: any) => news.id !== this.articleDetails.id
-      );
-      this.router.navigate(['']);
-      this.toastr.success('Article Deleted')
+    this.route.params.subscribe((params) => {
+      const articleId = params['id'];
+      this.newsService.deleteNews(articleId).subscribe(() => {
+        this.newsArticles = this.newsArticles.filter(
+          (news: any) => news.id !== articleId
+        );
+        this.router.navigate(['']);
+        this.toastr.success('Article Deleted');
+      });
     });
   }
 
-  edit(){
-    this.editModalOpen = true
+  edit() {
+    this.editModalOpen = true;
   }
 
-  backToHomepage(){
+  backToHomepage() {
     this.router.navigate(['']);
   }
 
-  editNews(){
-    this.newsService.updateNews(this.articleDetails).subscribe(() => {
-      this.editModalOpen = false
-    })
-    this.toastr.success('Article Updated')
+  editNews() {
+    this.route.params.subscribe((params) => {
+      const articleId = params['id'];
+      this.newsService.updateNews(articleId, {data:this.articleDetails}).subscribe(() => {
+        this.editModalOpen = false;
+        this.toastr.success('Article Updated ');
+      });
+    });
   }
 
   deleteModalToggle(open: boolean) {
