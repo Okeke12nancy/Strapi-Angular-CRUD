@@ -41,7 +41,6 @@ export class CreateNewsAppComponent {
   }
 
   onSubmit() {
-    console.log(this.newArticle);
     if (
       this.isEmpty(this.newArticle.title) ||
       this.isEmpty(this.newArticle.content) ||
@@ -52,17 +51,18 @@ export class CreateNewsAppComponent {
       );
       return; // Prevent further processing if fields are empty
     } else {
+      console.log(this.newArticle);
       const article: any = {
         title: this.newArticle.title,
         content: this.newArticle.content,
         author: this.newArticle.author,
-        date: new Date(),
+        // date: new Date(),
         imageUrl: this.newArticle.imageUrl,
       };
       console.log(article);
       this.isLoading = true;
       this.newsArticles.push(article);
-      this.newsService.createNews(article).subscribe(() => {
+      this.newsService.createNews({ data: article }).subscribe(() => {
         this.newArticle.title = '';
         this.newArticle.content = '';
         this.newArticle.author = '';

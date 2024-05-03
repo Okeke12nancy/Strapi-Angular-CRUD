@@ -33,8 +33,8 @@ export class NewsServiceTsService {
 
 
   // this is the create news that works with json server
-  createNews(news: NewsArticle): Observable<NewsArticle> {
-    return this.http.post<NewsArticle>(this.apiUrl, news, httpOptions);
+  createNews(news: any): Observable<NewsArticle> {
+    return this.http.post<any>(this.apiUrl, news, httpOptions);
   }
 
   // this is the get news that works with the endpoint
