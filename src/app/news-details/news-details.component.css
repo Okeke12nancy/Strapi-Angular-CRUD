@@ -94,7 +94,12 @@
 .article_content{
   font-size: 16px;
   height: 200px;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
   font-style: italic;
+}
+.article_content::-webkit-scrollbar{
+  display: none;
 }
 .actions_btn{
   width: 100%;

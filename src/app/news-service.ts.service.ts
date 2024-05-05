@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { NewsArticle } from '../app/models/news';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -12,7 +12,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class NewsServiceTsService {
- apiUrl = 'http://127.0.0.1:1337/api/blogs-apps';
+ apiUrl = 'http://127.0.0.1:1337/api/news-apps';
 
   private newsSubject = new BehaviorSubject<any>([]);
   news$: Observable<any> = this.newsSubject.asObservable();
@@ -32,13 +32,25 @@ export class NewsServiceTsService {
   // }
 
   // this is the create news that works with the endpoint
+  
+  createLocalState(news: any){
+    return this.newsSubject.next(news)
+  }
+
+  getLocalState(): Observable<any> {
+  return this.newsSubject.asObservable();
+}
+
   createNews(news: any): Observable<NewsArticle> {
-    return this.http.post<any>('http://127.0.0.1:1337/api/blogs-apps', news, httpOptions);
+    return this.http.post<any>('http://127.0.0.1:1337/api/news-apps', news, httpOptions);
   }
 
   // this is the get news that works with the endpoint
   getNews(): Observable<any> {
-    return this.http.get<any>('http://127.0.0.1:1337/api/blogs-apps' );
+    return timer(0, 5000).pipe(
+      switchMap(() => this.http.get<any>('http://127.0.0.1:1337/api/news-apps' ))
+    );
+    // return this.http.get<any>('http://127.0.0.1:1337/api/news-apps' );
   }
 
 // Get a specific news article by ID

@@ -20,31 +20,10 @@ export class AppComponent implements OnInit{
   newsArticles: NewsArticle[] =[]
   error: any;
 
-  // constructor(private newsService: NewsServiceTsService) { }
   ngOnInit() {
 
   }
-  // ngOnInit() {
-  //   this.newsService.getNews()
-  //     .subscribe(
-  //       (data) => this.newsArticles = data,
-  //       (error) => this.error = error
-  //     );
-  // }
 
-
-  // getNews() {
-  //   // Call this method to refresh news list (optional)
-  //   this.newsService.getNews()
-  //     .subscribe(articles => this.newsArticles = articles);
-  // }
-
-//   deleteNews(id: number) {
-//     this.newsService.deleteNews(id)
-//       .subscribe(() => {
-//         // Update the list after successful deletion (optional)
-//       });
-//   }
 }
 
 

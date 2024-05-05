@@ -42,7 +42,7 @@ export class NewsListComponent {
   }
 
   getNews() {
-    this.newsService.news$.subscribe((latestNews) => {
+    this.newsService.getLocalState().subscribe((latestNews) => {
       this.newsArticles = latestNews.data;
     });
   }
